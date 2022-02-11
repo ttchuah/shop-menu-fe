@@ -1,7 +1,7 @@
 // @import '@bbyca/ecomm-styles';
 
-$small-screen: #{'min-width: 768px'};
-$medium-screen: #{'min-width: 1025px'};
+$small-screen: #{"min-width: 768px"};
+$medium-screen: #{"min-width: 1025px"};
 
 // :root {
 //   @custom-media --small-screen (min-width: 768px);
@@ -131,6 +131,7 @@ $medium-screen: #{'min-width: 1025px'};
 }
 
 .MenuWrapper {
+  z-index: var(--menu-z-index);
   display: none;
   position: fixed;
   // top: 108px;

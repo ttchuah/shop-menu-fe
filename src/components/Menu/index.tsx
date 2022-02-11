@@ -18,7 +18,7 @@ export interface MenuProps {
 }
 
 function isCategoryGroup(
-  toBeDetermined: CategoryGroup | Category,
+  toBeDetermined: CategoryGroup | Category
 ): toBeDetermined is CategoryGroup {
   if ("groupTitle" in toBeDetermined) {
     return true;
@@ -76,7 +76,10 @@ const Menu: FC<MenuProps> = ({
             className={classname("menu-link", {
               "menu-link--active": isCategorySelected,
             })}
-            onClick={() => onSelectCategory(category)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectCategory(category);
+            }}
           >
             {category.ctaText}
           </button>
@@ -101,7 +104,7 @@ const Menu: FC<MenuProps> = ({
       { "menu--child-active": !!selectedItem },
       {
         "menu--hidden": !active,
-      },
+      }
     );
   } else {
     cssClass = classname(
@@ -109,7 +112,7 @@ const Menu: FC<MenuProps> = ({
       { "menu-inner--active": active },
       {
         "menu-inner--child-active": !!selectedItem,
-      },
+      }
     );
   }
   const isDesktop = useMediaQuery({
@@ -119,8 +122,28 @@ const Menu: FC<MenuProps> = ({
   return (
     <div className={cssClass}>
       {heading && <h2>{heading}</h2>}
-      {!isL1 && <button className="ShopAllBtn" onClick={onClickShopAll}>Shop All</button>}
-      {!isDesktop && <button className="BackBtn" onClick={close}>&lt; Back</button>}
+      {!isL1 && (
+        <button
+          className="ShopAllBtn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickShopAll();
+          }}
+        >
+          Shop All
+        </button>
+      )}
+      {!isDesktop && (
+        <button
+          className="BackBtn"
+          onClick={(e) => {
+            e.stopPropagation();
+            close?.();
+          }}
+        >
+          &lt; Back
+        </button>
+      )}
       {items.map((item: CategoryGroup | Category) => {
         return (
           <React.Fragment>
@@ -131,7 +154,7 @@ const Menu: FC<MenuProps> = ({
                 {
                   // Print out the list of categories for this group.
                   item.childItems?.map((category: Category) =>
-                    renderCategory(category),
+                    renderCategory(category)
                   )
                 }
               </React.Fragment>

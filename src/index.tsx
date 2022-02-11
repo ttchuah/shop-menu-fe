@@ -177,24 +177,60 @@ const rootMenu = [
 ];
 
 const App: React.FC = () => {
-  const [visible, setVisible] = React.useState(false);
   const [selectedItem, selectItem] = React.useState<string>("");
   const [rootMenuState, setRootMenuState] = React.useState(false);
+  const [overlayVisible, setOverlayVisible] = React.useState(false);
 
   // a substitute for redux-responsive
   const isDesktop = useMediaQuery({
     query: "(min-width: 1025px)",
   });
 
+  const fillerContent: string[] = new Array<string>(20).fill(
+    "Bacon ipsum dolor amet jowl shank tongue burgdoggen corned beef. Alcatra short loin t-bone tenderloin ham swine ball tip chuck prosciutto frankfurter. Shankle salami meatball kevin sirloin meatloaf chuck. Beef ribs burgdoggen salami short loin. Corned beef pastrami frankfurter, pig tri-tip spare ribs short loin shoulder pancetta."
+  );
+
+  // Show the overlay if
+  // - hamburger menu is open (on mobile/tablet) or
+  // - a top level menu item (like 'shop' or 'brand') has been selected (on desktop)
+  // Hide otherwise.
+  React.useEffect(() => {
+    if (selectedItem || rootMenuState) {
+      setOverlayVisible(true);
+    } else {
+      setOverlayVisible(false);
+    }
+  }, [selectedItem, rootMenuState]);
+
+  const closeOverlay = () => {
+    selectItem("");
+    setRootMenuState(false);
+  };
+
+  // If changing viewports, then close the overlay.
+  React.useEffect(() => {
+    closeOverlay();
+  }, [isDesktop]);
+
   return (
     <React.Fragment>
-      <div className="main">
+      <div
+        className={classname({
+          overlay: overlayVisible,
+        })}
+        onClick={() => {
+          closeOverlay();
+        }}
+      ></div>
+      <div
+        className="main"
+        onClick={() => {
+          overlayVisible && closeOverlay();
+        }}
+      >
         {/* Drawer */}
         <Hamburger onClick={() => setRootMenuState(!rootMenuState)} />
-        <div
-          // className={classname([styles.MenuWrapper, { [styles.open]: this.state.open }])}
-          className={classname(["MenuWrapper", { ["open"]: rootMenuState }])}
-        >
+        <div className={classname(["MenuWrapper", { open: rootMenuState }])}>
           <RootMenu
             menuItems={rootMenu}
             selected={selectedItem}
@@ -203,6 +239,9 @@ const App: React.FC = () => {
             rootMenuState={rootMenuState}
           />
         </div>
+        {fillerContent.map((line) => {
+          return <p>{line}</p>;
+        })}
       </div>
     </React.Fragment>
   );

@@ -1,3 +1,9 @@
+:root {
+  --menu-height: 50px;
+  --overlay-z-index: 5;
+  --menu-z-index: 10;
+}
+
 html,
 body {
   padding: 0;
@@ -18,6 +24,16 @@ button {
 .main {
   width: 100%;
   background-color: #003da6;
-  height: 50px;
+  height: var(--menu-height);
   position: relative;
+}
+
+.overlay {
+  position: absolute;
+  z-index: var(--overlay-z-index);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(50, 50, 50, 0.5);
+  top: var(--menu-height);
+  left: 0;
 }
