@@ -38,7 +38,7 @@ button {
   top: var(--menu-height);
   left: 0;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 0.25s;
 }
 
 .overlay--active {
