@@ -11,6 +11,9 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+body.noscroll {
+  overflow: hidden;
+}
 h1,
 p {
   font-family: Lato;

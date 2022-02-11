@@ -193,15 +193,19 @@ const App: React.FC = () => {
     "Bacon ipsum dolor amet jowl shank tongue burgdoggen corned beef. Alcatra short loin t-bone tenderloin ham swine ball tip chuck prosciutto frankfurter. Shankle salami meatball kevin sirloin meatloaf chuck. Beef ribs burgdoggen salami short loin. Corned beef pastrami frankfurter, pig tri-tip spare ribs short loin shoulder pancetta."
   );
 
-  // Show the overlay if
-  // - hamburger menu is open (on tablet) or
-  // - a top level menu item (like 'shop' or 'brand') has been selected (on desktop)
+  // Disable scrolling if menu is open.
+  // Show the overlay only if menu is open on tablet or desktop
   // Hide otherwise.
   React.useEffect(() => {
-    if (isTabletOrLarger && (selectedItem || rootMenuState)) {
-      setOverlayVisible(true);
+    const isMenuOpen = selectedItem || rootMenuState;
+    if (isMenuOpen) {
+      document.body.classList.add("noscroll");
+      if (isTabletOrLarger) {
+        setOverlayVisible(true);
+      }
     } else {
       setOverlayVisible(false);
+      document.body.classList.remove("noscroll");
     }
   }, [isTabletOrLarger, selectedItem, rootMenuState]);
 
