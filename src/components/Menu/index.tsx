@@ -119,8 +119,8 @@ const Menu: FC<MenuProps> = ({
   return (
     <div className={cssClass}>
       {heading && <h2>{heading}</h2>}
-      {!isL1 && <button onClick={onClickShopAll}>Shop All</button>}
-      {!isDesktop && <button onClick={close}>Go Back</button>}
+      {!isL1 && <button className="ShopAllBtn" onClick={onClickShopAll}>Shop All</button>}
+      {!isDesktop && <button className="BackBtn" onClick={close}>&lt; Back</button>}
       {items.map((item: CategoryGroup | Category) => {
         return (
           <React.Fragment>

@@ -36,7 +36,9 @@ $menuWidths: (
   background-color: var(--light-grey);
   left: 0;
   box-sizing: border-box;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   @include menuWidth;
+
   &--child-active {
     left: -100%;
   }
@@ -47,6 +49,7 @@ $menuWidths: (
     }
     bottom: -200px;
   }
+
   @include for-size('medium') {
     top: 100%;
     height: max-content;
@@ -64,8 +67,6 @@ $menuWidths: (
     list-style-type: none;
     padding: 0;
   }
-
-  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
   &--hidden {
     // visibility: hidden;
@@ -112,6 +113,35 @@ $menuWidths: (
       &--child-active {
         left: 100%;
       }
+    }
+  }
+}
+
+// Button
+.menu {
+  button,
+  h2 {
+    padding: 20px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--light-grey);
+    color: var(--black);
+    width: 100%;
+    text-align: left;
+    font-size: 100%;
+
+    &.BackBtn {
+      color: var(--blue);
+      font-weight: 600;
+    }
+  }
+
+  &> h2 {
+    margin: 0;
+    border: none;
+    width: auto;
+
+    &:not(:first-of-type) {
+      margin-top: 10px;
     }
   }
 }
