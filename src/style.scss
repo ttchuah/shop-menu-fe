@@ -1,0 +1,22 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+h1,
+p {
+  font-family: Lato;
+}
+
+button {
+  border: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.main {
+  width: 100%;
+  background-color: #003da6;
+  height: 50px;
+  position: relative;
+}

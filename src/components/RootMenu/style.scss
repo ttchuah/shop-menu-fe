@@ -1,0 +1,162 @@
+// @import '@bbyca/ecomm-styles';
+
+$small-screen: #{'min-width: 768px'};
+$medium-screen: #{'min-width: 1025px'};
+
+// :root {
+//   @custom-media --small-screen (min-width: 768px);
+//   @custom-media --medium-screen (min-width: 1025px);
+//   @custom-media --large-screen (min-width: 1281px);
+//   @custom-media --extraLarge-screen (min-width: 1920px);
+
+//   @custom-media --only-extraSmall-screen (max-width: 767px);
+//   @custom-media --only-small-screen (min-width: 768px) and (max-width: 1024px);
+//   @custom-media --only-medium-screen (min-width: 1025px) and (max-width: 1280px);
+//   @custom-media --only-large-screen (min-width: 1281px) and (max-width: 1919px);
+//   @custom-media --only-extraLarge-screen (min-width: 1920px);
+// }
+:root {
+  --black: #000;
+  --white: #fff;
+  --light-grey: #f4f6f9;
+  --blue: #001e73;
+}
+
+.RootMenu {
+  width: 100%;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    @media ($medium-screen) {
+      padding: 12px 24px;
+    }
+
+    &.mobileOnly {
+      display: block;
+
+      @media ($medium-screen) {
+        display: none;
+      }
+    }
+  }
+
+  li {
+    @media ($medium-screen) {
+      display: inline;
+      margin-right: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .active {
+    button.rootMenuBtn {
+      background-color: var(--blue);
+      color: var(--white);
+
+      span {
+        color: var(--white);
+      }
+
+      svg {
+        color: var(--white);
+        fill: var(--white);
+      }
+    }
+  }
+
+  button.rootMenuBtn,
+  a {
+    padding: 20px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--light-grey);
+    color: var(--black);
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 100%;
+    font-weight: 100;
+
+    span {
+      color: var(--black);
+    }
+
+    @media ($medium-screen) {
+      padding: inherit;
+      background: none;
+      border-bottom: none;
+      color: var(--white);
+      width: inherit;
+      text-align: center;
+      display: inline-block;
+      font-size: 100%;
+      font-weight: 600;
+
+      span {
+        color: var(--white);
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: sub;
+
+      @media ($medium-screen) {
+        color: var(--white);
+        fill: var(--white);
+      }
+    }
+  }
+
+  a {
+    background-color: transparent;
+    border-bottom: none;
+    text-decoration: none;
+    color: var(--black);
+    width: auto;
+  }
+
+  .flyoutContainer {
+    display: none;
+
+    &.active {
+      display: inline-block;
+    }
+  }
+}
+
+.MenuWrapper {
+  display: none;
+  position: fixed;
+  // top: 108px;
+  top: 50px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--light-grey);
+
+  &.open {
+    display: block;
+  }
+
+  @media ($small-screen) {
+    // top: 140px;
+    top: 50px;
+    width: 320px;
+    border-right: 1px solid var(--light-grey);
+  }
+
+  @media ($medium-screen) {
+    display: block;
+    position: relative;
+    width: auto;
+    top: inherit;
+    background: none;
+    border: none;
+  }
+}

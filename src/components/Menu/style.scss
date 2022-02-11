@@ -1,0 +1,123 @@
+@mixin for-size($size) {
+  @if ($size == 'extra-small-only') {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+  @if ($size == 'small') {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @if ($size == 'medium') {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+$menuWidths: (
+  'extraSmall': 100%,
+  'small': 320px,
+  'medium': 250px,
+);
+
+@mixin menuWidth {
+  width: map-get($menuWidths, 'extraSmall');
+  @include for-size('small') {
+    width: map-get($menuWidths, 'small');
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  // border: 2px solid red;
+  background-color: var(--light-grey);
+  left: 0;
+  box-sizing: border-box;
+  @include menuWidth;
+  &--child-active {
+    left: -100%;
+  }
+
+  @include for-size('small') {
+    &--child-active {
+      left: 0;
+    }
+    bottom: -200px;
+  }
+  @include for-size('medium') {
+    top: 100%;
+    height: max-content;
+  }
+
+  &-link {
+    @include menuWidth;
+    &--active {
+      background-color: darkgray;
+    }
+    color: black;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &--hidden {
+    // visibility: hidden;
+    display: none;
+  }
+
+  &-inner {
+    // border: 2px dashed black;
+    // border-radius: 4px;
+
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: var(--light-grey);
+    left: 100%;
+    display: none;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    @include menuWidth;
+
+    &--child-active {
+      left: 0;
+    }
+    &--active {
+      display: block;
+    }
+
+    @include for-size('small') {
+      border-right: 1px solid var(--light-grey);
+      &--active {
+        left: 0;
+      }
+    }
+
+    @include for-size('medium') {
+      border-width: 1px;
+      border-bottom: solid var(--light-grey);
+      border-left: solid var(--light-grey);
+
+      &--active {
+        left: 100%;
+      }
+
+      &--child-active {
+        left: 100%;
+      }
+    }
+  }
+}
+
+.RootMenu {
+  .menu-link {
+    color: black;
+  }
+}

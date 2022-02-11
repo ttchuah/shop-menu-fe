@@ -1,0 +1,8 @@
+$small-screen: #{'min-width: 768px'};
+$medium-screen: #{'min-width: 1025px'};
+
+.Hamburger {
+  @media ($medium-screen) {
+    display: none;
+  }
+}
