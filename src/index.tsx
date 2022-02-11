@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { useMediaQuery } from "react-responsive";
 
 // import Link from "./components/Link";
-import Link from './components/Link'
+import Link from "./components/Link";
 import Menu from "./components/Menu";
 
 import classname from "classnames";
@@ -200,6 +200,7 @@ const App: React.FC = () => {
             selected={selectedItem}
             select={selectItem}
             isDesktop={isDesktop}
+            rootMenuState={rootMenuState}
           />
         </div>
       </div>

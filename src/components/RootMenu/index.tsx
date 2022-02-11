@@ -15,6 +15,7 @@ interface Props {
   selected: string;
   select: (item: string) => void;
   isDesktop: boolean;
+  rootMenuState: boolean;
 }
 
 const RootMenu: React.FunctionComponent<Props> = ({
@@ -22,7 +23,14 @@ const RootMenu: React.FunctionComponent<Props> = ({
   selected,
   select,
   isDesktop = false,
+  rootMenuState,
 }) => {
+  React.useEffect(() => {
+    if (!rootMenuState) {
+      select("");
+    }
+  }, [rootMenuState, select]);
+
   return (
     <div className={"RootMenu"}>
       <ul>
