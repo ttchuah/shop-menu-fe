@@ -1,6 +1,7 @@
 :root {
   --menu-height: 50px;
-  --overlay-z-index: 5;
+  --overlay-active-z-index: 5;
+  --overlay-hidden-z-index: -5;
   --menu-z-index: 10;
 }
 
@@ -30,10 +31,17 @@ button {
 
 .overlay {
   position: absolute;
-  z-index: var(--overlay-z-index);
+  z-index: var(--overlay-hidden-z-index);
   height: 100%;
   width: 100%;
-  background-color: rgba(50, 50, 50, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   top: var(--menu-height);
   left: 0;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.overlay--active {
+  opacity: 1;
+  z-index: var(--overlay-active-z-index);
 }

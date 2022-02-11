@@ -182,8 +182,11 @@ const App: React.FC = () => {
   const [overlayVisible, setOverlayVisible] = React.useState(false);
 
   // a substitute for redux-responsive
-  const isDesktop = useMediaQuery({
+  const isDesktop: boolean = useMediaQuery({
     query: "(min-width: 1025px)",
+  });
+  const isTabletOrLarger: boolean = useMediaQuery({
+    query: "(min-width: 768px)",
   });
 
   const fillerContent: string[] = new Array<string>(20).fill(
@@ -191,32 +194,32 @@ const App: React.FC = () => {
   );
 
   // Show the overlay if
-  // - hamburger menu is open (on mobile/tablet) or
+  // - hamburger menu is open (on tablet) or
   // - a top level menu item (like 'shop' or 'brand') has been selected (on desktop)
   // Hide otherwise.
   React.useEffect(() => {
-    if (selectedItem || rootMenuState) {
+    if (isTabletOrLarger && (selectedItem || rootMenuState)) {
       setOverlayVisible(true);
     } else {
       setOverlayVisible(false);
     }
-  }, [selectedItem, rootMenuState]);
+  }, [isTabletOrLarger, selectedItem, rootMenuState]);
 
   const closeOverlay = () => {
     selectItem("");
     setRootMenuState(false);
   };
 
-  // If changing viewports, then close the overlay.
+  // If changing viewports between mobile/tablet/desktop, then close the overlay.
   React.useEffect(() => {
     closeOverlay();
-  }, [isDesktop]);
+  }, [isDesktop, isTabletOrLarger]);
 
   return (
     <React.Fragment>
       <div
-        className={classname({
-          overlay: overlayVisible,
+        className={classname("overlay", {
+          "overlay--active": overlayVisible,
         })}
         onClick={() => {
           closeOverlay();
