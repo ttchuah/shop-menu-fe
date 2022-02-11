@@ -29,21 +29,31 @@ $menuWidths: (
 }
 
 .menu {
+  opacity: 0;
+  z-index: -1;
   position: absolute;
   top: 0;
   height: 100%;
-  // border: 2px solid red;
   background-color: var(--light-grey);
   left: 0;
   box-sizing: border-box;
-  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 0.5s ease-in-out;
   @include menuWidth;
 
   &--child-active {
     left: -100%;
   }
 
+  &--active {
+    // visibility: visible;
+    opacity: 1;
+    z-index: 1;
+  }
+
   @include for-size('small') {
+    overflow-x: hidden;
+    overflow-y: scroll;
+
     &--child-active {
       left: 0;
     }
@@ -52,7 +62,13 @@ $menuWidths: (
 
   @include for-size('medium') {
     top: 100%;
-    height: max-content;
+    height: 0;
+    overflow: visible;
+    border-right: 1px solid var(--light-grey);
+
+    &--active {
+      height: max-content;
+    }
   }
 
   &-link {
@@ -66,11 +82,6 @@ $menuWidths: (
   ul {
     list-style-type: none;
     padding: 0;
-  }
-
-  &--hidden {
-    // visibility: hidden;
-    display: none;
   }
 
   &-inner {

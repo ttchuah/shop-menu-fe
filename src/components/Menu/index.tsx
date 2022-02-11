@@ -100,7 +100,7 @@ const Menu: FC<MenuProps> = ({
       "menu",
       { "menu--child-active": !!selectedItem },
       {
-        "menu--hidden": !active,
+        "menu--active": active,
       },
     );
   } else {

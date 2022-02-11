@@ -122,30 +122,30 @@ $medium-screen: #{'min-width: 1025px'};
   }
 
   .flyoutContainer {
-    display: none;
+    display: block;
 
-    &.active {
+    @media ($medium-screen) {
       display: inline-block;
     }
   }
 }
 
 .MenuWrapper {
-  display: none;
   position: fixed;
   // top: 108px;
   top: 50px;
   left: 0;
-  height: 100%;
+  height: 0;
   width: 100%;
+  overflow: hidden;
   background-color: var(--light-grey);
+  transition: all .5s ease-in-out;
 
   &.open {
-    display: block;
+    height: 100%;
   }
 
   @media ($small-screen) {
-    // top: 140px;
     top: 50px;
     width: 320px;
     border-right: 1px solid var(--light-grey);
@@ -158,5 +158,7 @@ $medium-screen: #{'min-width: 1025px'};
     top: inherit;
     background: none;
     border: none;
+    height: 100%;
+    overflow: visible;
   }
 }

@@ -52,18 +52,18 @@ const RootMenu: React.FunctionComponent<Props> = ({
                   {menuItem.label}
                   {isDesktop ? (isActive ? "^" : "\\/") : ">"}
                 </button>
-                <div
+                {/* <div
                   className={classname([
                     "flyoutContainer",
                     { ["active"]: isActive },
                   ])}
                 >
-                  {menuItem.content &&
-                    menuItem.content({
-                      active: isActive,
-                      close: () => select(""),
-                    })}
-                </div>
+                </div> */}
+                {menuItem.content &&
+                  menuItem.content({
+                    active: isActive,
+                    close: () => select(""),
+                  })}
               </li>
             );
           })}
