@@ -52,13 +52,6 @@ const RootMenu: React.FunctionComponent<Props> = ({
                   {menuItem.label}
                   {isDesktop ? (isActive ? "^" : "\\/") : ">"}
                 </button>
-                {/* <div
-                  className={classname([
-                    "flyoutContainer",
-                    { ["active"]: isActive },
-                  ])}
-                >
-                </div> */}
                 {menuItem.content &&
                   menuItem.content({
                     active: isActive,

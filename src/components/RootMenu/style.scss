@@ -15,6 +15,7 @@ $medium-screen: #{'min-width: 1025px'};
 //   @custom-media --only-large-screen (min-width: 1281px) and (max-width: 1919px);
 //   @custom-media --only-extraLarge-screen (min-width: 1920px);
 // }
+
 :root {
   --black: #000;
   --white: #fff;
@@ -31,7 +32,7 @@ $medium-screen: #{'min-width: 1025px'};
     margin: 0;
 
     @media ($medium-screen) {
-      padding: 12px 24px;
+      padding: 0 24px;
     }
 
     &.mobileOnly {
@@ -48,6 +49,8 @@ $medium-screen: #{'min-width: 1025px'};
       display: inline;
       margin-right: 24px;
       line-height: 24px;
+      position: relative;
+      padding: 16px 0;
     }
   }
 
@@ -132,7 +135,6 @@ $medium-screen: #{'min-width: 1025px'};
 
 .MenuWrapper {
   position: fixed;
-  // top: 108px;
   top: 50px;
   left: 0;
   height: 0;
