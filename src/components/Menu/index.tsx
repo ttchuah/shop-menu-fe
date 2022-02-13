@@ -71,16 +71,15 @@ const Menu: FC<MenuProps> = ({
     const isCategorySelected = category.ctaText === selectedItem;
     return (
       <React.Fragment>
-        <div>
-          <button
-            className={classname("menu-link", {
-              "menu-link--active": isCategorySelected,
-            })}
-            onClick={() => onSelectCategory(category)}
-          >
-            {category.ctaText}
-          </button>
-        </div>
+        <button
+          className={classname("menu-link", {
+            "menu-link--active": isCategorySelected,
+          })}
+          onClick={() => onSelectCategory(category)}
+        >
+          {category.ctaText}
+          <span>&gt;</span>
+        </button>
         {category.childItems && (
           <Menu
             active={isCategorySelected}
@@ -118,16 +117,18 @@ const Menu: FC<MenuProps> = ({
 
   return (
     <div className={cssClass}>
-      {heading && <h2>{heading}</h2>}
-      {!isL1 && <button className="ShopAllBtn" onClick={onClickShopAll}>Shop All</button>}
       {!isDesktop && <button className="BackBtn" onClick={close}>&lt; Back</button>}
+      {heading && 
+        (<h2 className="CategoryTitle">
+          {heading}
+          {!isL1 && <button className="ShopAllBtn" onClick={onClickShopAll}>Shop All</button>}
+        </h2>)}
       {items.map((item: CategoryGroup | Category) => {
         return (
           <React.Fragment>
             {isCategoryGroup(item) && (
               <React.Fragment>
                 <h2>{item.groupTitle}</h2>
-
                 {
                   // Print out the list of categories for this group.
                   item.childItems?.map((category: Category) =>

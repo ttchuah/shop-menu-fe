@@ -56,11 +56,11 @@ $menuWidths: (
   @include for-size('small') {
     overflow-x: hidden;
     overflow-y: scroll;
+    bottom: -200px;
 
     &--child-active {
       left: 0;
     }
-    bottom: -200px;
   }
 
   @include for-size('medium') {
@@ -78,10 +78,19 @@ $menuWidths: (
 
   &-link {
     @include menuWidth;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 100%;
+
+    @include for-size('medium') {
+      width: 100%;
+    }
+
     &--active {
       background-color: darkgray;
     }
-    color: black;
   }
 
   ul {
@@ -90,24 +99,24 @@ $menuWidths: (
   }
 
   &-inner {
-    // border: 2px dashed black;
-    // border-radius: 4px;
-
+    @include menuWidth;
     box-sizing: border-box;
     position: absolute;
     top: 0;
     height: 100%;
     background-color: var(--light-grey);
     left: 100%;
-    display: none;
-    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-    @include menuWidth;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
 
     &--child-active {
       left: 0;
     }
+
     &--active {
-      display: block;
+      visibility: visible;
+      opacity: 1;
     }
 
     @include for-size('small') {
@@ -141,17 +150,27 @@ $menuWidths: (
     background-color: var(--white);
     border-bottom: 1px solid var(--light-grey);
     color: var(--black);
-    width: 100%;
     text-align: left;
     font-size: 100%;
 
     &.BackBtn {
+      width: 100%;
       color: var(--blue);
       font-weight: 600;
     }
+
+    &.ShopAllBtn {
+      padding: 10px;
+      color: var(--white);
+      border-radius: 5px;
+      background-color: var(--blue);
+    }
   }
 
-  &> h2 {
+  h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0;
     border: none;
     width: auto;
