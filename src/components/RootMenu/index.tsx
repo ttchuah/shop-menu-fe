@@ -45,9 +45,10 @@ const RootMenu: React.FunctionComponent<Props> = ({
               >
                 <button
                   className="rootMenuBtn"
-                  onClick={() =>
-                    selected && isActive ? select("") : select(menuItem.id)
-                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    selected && isActive ? select("") : select(menuItem.id);
+                  }}
                 >
                   {menuItem.label}
                   {isDesktop ? (isActive ? "^" : "\\/") : ">"}

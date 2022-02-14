@@ -1,30 +1,30 @@
 @mixin for-size($size) {
-  @if ($size == 'extra-small-only') {
+  @if ($size == "extra-small-only") {
     @media (max-width: 767px) {
       @content;
     }
   }
-  @if ($size == 'small') {
+  @if ($size == "small") {
     @media (min-width: 768px) {
       @content;
     }
   }
-  @if ($size == 'medium') {
+  @if ($size == "medium") {
     @media (min-width: 1025px) {
       @content;
     }
   }
 }
 $menuWidths: (
-  'extraSmall': 100%,
-  'small': 320px,
-  'medium': 250px,
+  "extraSmall": 100%,
+  "small": 320px,
+  "medium": 250px,
 );
 
 @mixin menuWidth {
-  width: map-get($menuWidths, 'extraSmall');
-  @include for-size('small') {
-    width: map-get($menuWidths, 'small');
+  width: map-get($menuWidths, "extraSmall");
+  @include for-size("small") {
+    width: map-get($menuWidths, "small");
   }
 }
 
@@ -32,7 +32,7 @@ $menuWidths: (
   @include menuWidth;
   opacity: 0;
   visibility: hidden;
-  // z-index: -1;
+  z-index: var(--menu-z-index);
   position: absolute;
   top: 0;
   height: 100%;
@@ -53,17 +53,15 @@ $menuWidths: (
     transform: translateX(0);
   }
 
-  @include for-size('small') {
+  @include for-size("small") {
     overflow-x: hidden;
     overflow-y: scroll;
-    bottom: -200px;
-
     &--child-active {
       left: 0;
     }
   }
 
-  @include for-size('medium') {
+  @include for-size("medium") {
     top: 100%;
     height: 0;
     overflow: visible;
@@ -84,7 +82,7 @@ $menuWidths: (
     align-items: center;
     font-size: 100%;
 
-    @include for-size('medium') {
+    @include for-size("medium") {
       width: 100%;
     }
 
@@ -119,14 +117,14 @@ $menuWidths: (
       opacity: 1;
     }
 
-    @include for-size('small') {
+    @include for-size("small") {
       border-right: 1px solid var(--light-grey);
       &--active {
         left: 0;
       }
     }
 
-    @include for-size('medium') {
+    @include for-size("medium") {
       border-width: 1px;
       border-bottom: solid var(--light-grey);
       border-left: solid var(--light-grey);

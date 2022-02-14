@@ -177,24 +177,67 @@ const rootMenu = [
 ];
 
 const App: React.FC = () => {
-  const [visible, setVisible] = React.useState(false);
   const [selectedItem, selectItem] = React.useState<string>("");
   const [rootMenuState, setRootMenuState] = React.useState(false);
+  const [overlayVisible, setOverlayVisible] = React.useState(false);
 
   // a substitute for redux-responsive
-  const isDesktop = useMediaQuery({
+  const isDesktop: boolean = useMediaQuery({
     query: "(min-width: 1025px)",
   });
+  const isTabletOrLarger: boolean = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
+
+  const fillerContent: string[] = new Array<string>(20).fill(
+    "Bacon ipsum dolor amet jowl shank tongue burgdoggen corned beef. Alcatra short loin t-bone tenderloin ham swine ball tip chuck prosciutto frankfurter. Shankle salami meatball kevin sirloin meatloaf chuck. Beef ribs burgdoggen salami short loin. Corned beef pastrami frankfurter, pig tri-tip spare ribs short loin shoulder pancetta."
+  );
+
+  // Disable scrolling if menu is open.
+  // Show the overlay only if menu is open on tablet or desktop
+  // Hide otherwise.
+  React.useEffect(() => {
+    const isMenuOpen = selectedItem || rootMenuState;
+    if (isMenuOpen) {
+      document.body.classList.add("noscroll");
+      if (isTabletOrLarger) {
+        setOverlayVisible(true);
+      }
+    } else {
+      setOverlayVisible(false);
+      document.body.classList.remove("noscroll");
+    }
+  }, [isTabletOrLarger, selectedItem, rootMenuState]);
+
+  const closeOverlay = () => {
+    selectItem("");
+    setRootMenuState(false);
+  };
+
+  // If changing viewports between mobile/tablet/desktop, then close the overlay.
+  React.useEffect(() => {
+    closeOverlay();
+  }, [isDesktop, isTabletOrLarger]);
 
   return (
     <React.Fragment>
-      <div className="main">
+      <div
+        className={classname("overlay", {
+          "overlay--active": overlayVisible,
+        })}
+        onClick={() => {
+          closeOverlay();
+        }}
+      ></div>
+      <div
+        className="main"
+        onClick={() => {
+          overlayVisible && closeOverlay();
+        }}
+      >
         {/* Drawer */}
         <Hamburger onClick={() => setRootMenuState(!rootMenuState)} />
-        <div
-          // className={classname([styles.MenuWrapper, { [styles.open]: this.state.open }])}
-          className={classname(["MenuWrapper", { ["open"]: rootMenuState }])}
-        >
+        <div className={classname(["MenuWrapper", { open: rootMenuState }])}>
           <RootMenu
             menuItems={rootMenu}
             selected={selectedItem}
@@ -203,6 +246,9 @@ const App: React.FC = () => {
             rootMenuState={rootMenuState}
           />
         </div>
+        {fillerContent.map((line) => {
+          return <p>{line}</p>;
+        })}
       </div>
     </React.Fragment>
   );
